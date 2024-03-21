@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.gitlab.emradbuba.learning.learningproject.libs.security.WhitelistingAuthenticationProvider,\
+com.gitlab.emradbuba.learning.learningproject.libs.config.DefaultWhitelistingConfig
