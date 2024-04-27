@@ -1,6 +1,6 @@
 package com.gitlab.emradbuba.learning.learningproject.libs.security;
 
-import com.gitlab.emradbuba.learning.learningproject.libs.whitelist.UsernamesWhitelistProvider;
+import com.gitlab.emradbuba.learning.learningproject.libs.whitelist.GodModeLoginsProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,49 +17,50 @@ import static java.util.function.Predicate.not;
 
 @Component
 @Slf4j
-public class WhitelistingAuthenticationProvider implements AuthenticationProvider {
+public class GodModeAuthenticationProvider implements AuthenticationProvider {
 
-    private final List<UsernamesWhitelistProvider> whitelistProviders;
+    private final List<GodModeLoginsProvider> godModeLoginsProviders;
 
-    public WhitelistingAuthenticationProvider(List<UsernamesWhitelistProvider> whitelistProviders) {
-        this.whitelistProviders = whitelistProviders;
-        log.info("Configured {} whitelist providers: <{}>", whitelistProviders.size(),
-                listWhitelistProvidersNames(whitelistProviders));
+    public GodModeAuthenticationProvider(List<GodModeLoginsProvider> godModeLoginsProviders) {
+        this.godModeLoginsProviders = godModeLoginsProviders; // <-- gather user defined implementations (or a default one)
+        log.info("Configured {} GodMode logins providers: <{}>", godModeLoginsProviders.size(),
+                listGodModeLoginsProvidersNames(godModeLoginsProviders));
     }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        final String usernameFromToken = Optional.ofNullable(authentication)
+        final String usernameFromAuthToken = Optional.ofNullable(authentication)
                 .map(Authentication::getName)
                 .map(String::trim)
                 .map(String::toLowerCase)
                 .filter(not(String::isEmpty))
                 .orElse(null);
 
-        if (!StringUtils.hasText(usernameFromToken)) {
+        if (!StringUtils.hasText(usernameFromAuthToken)) {
             return null;
         }
 
-        if (isFoundInWhitelistProviders(usernameFromToken)) {
+        if (isFoundInGodModeLoginsProviders(usernameFromAuthToken)) {
+            // Forward token with same credentials, but add GodMode role, so clients can use it in security config
             return new UsernamePasswordAuthenticationToken(
                     authentication.getPrincipal(),
                     authentication.getCredentials(),
-                    List.of(new SimpleGrantedAuthority("ROLE_" + UsernamesWhitelistProvider.DEFAULT_WHITELIST_ROLENAME))
+                    List.of(new SimpleGrantedAuthority("ROLE_" + GodModeLoginsProvider.GOD_MODE_ROLENAME))
             );
         }
         return null;
     }
 
-    private static List<String> listWhitelistProvidersNames(List<UsernamesWhitelistProvider> whitelistProviders) {
+    private static List<String> listGodModeLoginsProvidersNames(List<GodModeLoginsProvider> whitelistProviders) {
         return whitelistProviders
                 .stream()
                 .map(wp -> wp.getClass().getName())
                 .toList();
     }
 
-    private boolean isFoundInWhitelistProviders(String usernameFromToken) {
-        return whitelistProviders.stream()
-                .anyMatch(wp -> wp.isWhitelisted(usernameFromToken));
+    private boolean isFoundInGodModeLoginsProviders(String usernameFromToken) {
+        return godModeLoginsProviders.stream()
+                .anyMatch(provider -> provider.isGodModeLogin(usernameFromToken));
     }
 
     @Override
