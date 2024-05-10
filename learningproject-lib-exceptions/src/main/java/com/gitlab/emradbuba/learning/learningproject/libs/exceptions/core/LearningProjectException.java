@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 @Getter
 public class LearningProjectException extends RuntimeException {
 
+    private String personId;
     private LearningProjectExceptionReason reason;
     private String extraInformation;
 
@@ -20,8 +21,15 @@ public class LearningProjectException extends RuntimeException {
         super(message, cause);
     }
 
+    public LearningProjectException withPersonId(String personId) {
+        if (StringUtils.isNoneBlank(personId)) {
+            this.personId = StringUtils.trim(personId);
+        }
+        return this;
+    }
+
     public LearningProjectException withExtraInformation(String extraInformation) {
-        if (StringUtils.isNoneBlank()) {
+        if (StringUtils.isNoneBlank(extraInformation)) {
             this.extraInformation = StringUtils.trim(extraInformation);
         }
         return this;
