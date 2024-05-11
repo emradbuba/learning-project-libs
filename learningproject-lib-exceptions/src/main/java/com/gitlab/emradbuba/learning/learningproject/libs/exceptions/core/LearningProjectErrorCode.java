@@ -1,6 +1,6 @@
 package com.gitlab.emradbuba.learning.learningproject.libs.exceptions.core;
 
-public enum OriginalExceptionReason {
+public enum LearningProjectErrorCode {
 
     PERSON_ID_NOT_FOUND("person_id_not_found", "Given personId does not exist in database"),
 
@@ -12,7 +12,7 @@ public enum OriginalExceptionReason {
     private final String reasonCode;
     private final String description;
 
-    OriginalExceptionReason(String reasonCode, String description) {
+    LearningProjectErrorCode(String reasonCode, String description) {
         this.reasonCode = reasonCode;
         this.description = description;
     }

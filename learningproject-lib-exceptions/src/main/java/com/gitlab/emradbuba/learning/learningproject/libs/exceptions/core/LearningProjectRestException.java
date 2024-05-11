@@ -9,10 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 @Getter
 public class LearningProjectRestException extends RuntimeException {
 
-    private OriginalExceptionReason originalExceptionReason;
-    private Integer suggestedHttpStatusCode;
-    private String personId;
-    private String extraInformation;
+    private LearningProjectErrorCode learningProjectErrorCode;
+    private Integer httpStatusCode;
+    private String solutionTip;
 
     public LearningProjectRestException(String message) {
         super(message);
@@ -22,30 +21,23 @@ public class LearningProjectRestException extends RuntimeException {
         super(message, cause);
     }
 
-    public LearningProjectRestException withPersonId(String personId) {
-        if (StringUtils.isNoneBlank(personId)) {
-            this.personId = StringUtils.trim(personId);
-        }
-        return this;
-    }
-
-    public LearningProjectRestException withExtraInformation(String extraInformation) {
-        if (StringUtils.isNoneBlank(extraInformation)) {
-            this.extraInformation = StringUtils.trim(extraInformation);
-        }
-        return this;
-    }
-
-    public LearningProjectRestException withOriginalExceptionReason(OriginalExceptionReason reason) {
-        if (reason != null) {
-            this.originalExceptionReason = reason;
-        }
-        return this;
-    }
-
-    public LearningProjectRestException withSuggestedHttpStatusCode(Integer httpStatusCode) {
+    public LearningProjectRestException withHttpStatusCode(Integer httpStatusCode) {
         if (httpStatusCode != null) {
-            this.suggestedHttpStatusCode = httpStatusCode;
+            this.httpStatusCode = httpStatusCode;
+        }
+        return this;
+    }
+
+    public LearningProjectRestException withLearningProjectErrorCode(LearningProjectErrorCode reason) {
+        if (reason != null) {
+            this.learningProjectErrorCode = reason;
+        }
+        return this;
+    }
+
+    public LearningProjectRestException withSolutionTip(String solutionTip) {
+        if (StringUtils.isNoneBlank(solutionTip)) {
+            this.solutionTip = StringUtils.trim(solutionTip);
         }
         return this;
     }
