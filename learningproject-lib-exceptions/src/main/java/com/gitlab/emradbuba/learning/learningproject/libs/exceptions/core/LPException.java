@@ -9,8 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 @Getter
 public class LPException extends RuntimeException {
 
-    private LPExceptionErrorCode LPExceptionErrorCode;
+    private String uniqueErrorCode;
     private Integer httpStatusCodeValue;
+    private String description;
     private String solutionTip;
     private String personBusinessId;
 
@@ -29,9 +30,16 @@ public class LPException extends RuntimeException {
         return this;
     }
 
-    public LPException withLPExceptionErrorCode(LPExceptionErrorCode reason) {
-        if (reason != null) {
-            this.LPExceptionErrorCode = reason;
+    public LPException withUniqueErrorCode(String reason) {
+        if (StringUtils.isNoneBlank(reason)) {
+            this.uniqueErrorCode = reason;
+        }
+        return this;
+    }
+
+    public LPException withDescription(String description) {
+        if (StringUtils.isNoneBlank(description)) {
+            this.uniqueErrorCode = description;
         }
         return this;
     }
@@ -44,7 +52,7 @@ public class LPException extends RuntimeException {
     }
 
     public LPException withPersonBusinessId(String personBusinessId) {
-        if (personBusinessId != null) {
+        if (StringUtils.isNoneBlank(personBusinessId)) {
             this.personBusinessId = personBusinessId;
         }
         return this;
