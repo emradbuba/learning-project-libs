@@ -39,7 +39,7 @@ public class LPException extends RuntimeException {
 
     public LPException withDescription(String description) {
         if (StringUtils.isNoneBlank(description)) {
-            this.uniqueErrorCode = description;
+            this.description = description;
         }
         return this;
     }

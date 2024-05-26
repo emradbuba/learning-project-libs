@@ -11,18 +11,7 @@
 
     <groupId>com.gitlab.emradbuba.learning.learningproject.libs</groupId>
     <artifactId>learningproject-lib-security</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
+    <version>1.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
