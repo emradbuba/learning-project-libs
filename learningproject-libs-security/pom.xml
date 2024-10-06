@@ -6,12 +6,15 @@
     <parent>
         <groupId>com.gitlab.emradbuba.learning</groupId>
         <artifactId>learningprojectlibs</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version> <!-- This version is basically not relevant as a aggregation for specific libs... -->
     </parent>
 
     <groupId>com.gitlab.emradbuba.learning.learningproject.libs</groupId>
     <artifactId>learningproject-lib-security</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
+    <properties>
+        <lombok.version>1.18.34</lombok.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -33,7 +36,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
