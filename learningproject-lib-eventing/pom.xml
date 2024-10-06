@@ -9,26 +9,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gitlab.emradbuba.learning.learningproject.libs</groupId>
-    <artifactId>learningproject-lib-lp-exceptions</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <artifactId>learningproject-lib-eventing</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <lombok.version>1.18.34</lombok.version>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

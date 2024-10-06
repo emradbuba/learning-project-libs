@@ -19,6 +19,7 @@
     <modules>
         <module>learningproject-libs-security</module>
         <module>learningproject-lib-exceptions</module>
+        <module>learningproject-lib-eventing</module>
     </modules>
 
     <dependencyManagement>
